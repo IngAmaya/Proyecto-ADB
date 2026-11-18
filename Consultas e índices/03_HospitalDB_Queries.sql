@@ -6,23 +6,6 @@ SET STATISTICS IO ON;
 GO
 
 /* ==========================================================================================
-   ÍNDICE ADICIONAL DOCUMENTADO EN EL INFORME PARA LA CONSULTA 3
-   (Se crea de forma idempotente en caso de no existir aún en la base de datos)
-   ========================================================================================== */
-IF NOT EXISTS (
-    SELECT 1 
-    FROM sys.indexes 
-    WHERE name = N'IX_Citas_Motivo_PacienteID' 
-      AND object_id = OBJECT_ID(N'[clinico].[Citas]')
-)
-BEGIN
-    CREATE NONCLUSTERED INDEX [IX_Citas_Motivo_PacienteID]
-    ON [clinico].[Citas] ([Motivo] ASC)
-    INCLUDE ([PacienteID]);
-END
-GO
-
-/* ==========================================================================================
    Consulta 1 — Ranking de médicos por citas completadas por especialidad
    ------------------------------------------------------------------------------------------
    Objetivo: Identificar y clasificar a los médicos según su carga de trabajo dentro de cada

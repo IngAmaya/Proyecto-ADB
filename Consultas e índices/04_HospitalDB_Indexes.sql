@@ -22,9 +22,3 @@ CREATE NONCLUSTERED INDEX IX_Citas_Motivo_PacienteID
 ON clinico.Citas (Motivo)
 INCLUDE (PacienteID);
 
--- =========================================================
--- Índice adicional: Optimización de búsqueda de Médicos por Especialidad
--- =========================================================
-CREATE NONCLUSTERED INDEX IX_Medicos_Especialidad
-ON clinico.Medicos (Especialidad)
-INCLUDE (MedicoID, Nombre, Apellido);
